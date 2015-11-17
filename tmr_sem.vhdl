@@ -33,9 +33,6 @@
 
         entity tmr_sem is
           PORT (
-        PORT_0 (
-        PORT_1 (
-        PORT_2 (
         status_heartbeat_0 : OUT STD_LOGIC;
         status_heartbeat_1 : OUT STD_LOGIC;
         status_heartbeat_2 : OUT STD_LOGIC;
@@ -126,14 +123,12 @@
         fecc_synbit_0 : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
         fecc_synbit_1 : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
         fecc_synbit_2 : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
-        fecc_synword_0 : IN STD_LOGIC_VECTOR(6 DOWNTO 0)
-        fecc_synword_1 : IN STD_LOGIC_VECTOR(6 DOWNTO 0)
+        fecc_synword_0 : IN STD_LOGIC_VECTOR(6 DOWNTO 0);
+        fecc_synword_1 : IN STD_LOGIC_VECTOR(6 DOWNTO 0);
         fecc_synword_2 : IN STD_LOGIC_VECTOR(6 DOWNTO 0)
-        );_0
-        );_1
-        );_2
+);
 
-        end tmr_sem;
+        end;
 
         architecture Behavioral of tmr_sem is
 

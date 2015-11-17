@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
-import sys
 
-def main(*args):
+import sys
+def main():
+    
+    infile = sys.argv[1]
+    #infile = 'sem_0.vho'
+    #outfile = 'tmr_sem.vhdl'
+    outfile = sys.argv[2]
     write_en = 0
     space = ' '
-    with open('tmr_sem.vhdl', 'w') as d:
+    semic = ';'
+    port_array = []
+    with open(outfile, 'w') as d:
         d.write("""----------------------------------------------------------------------------------
         -- Company: 
         -- Engineer: 
@@ -40,7 +47,7 @@ def main(*args):
 
         entity tmr_sem is\n""") 
         # include port definition
-        with open('sem_0.vho', 'r') as s:
+        with open(infile, 'r') as s:
             for line in s:
                 rsline = line.rstrip(" ")
                 if 'PORT' in rsline:
@@ -52,16 +59,34 @@ def main(*args):
                 elif 'END' in rsline and 'COMPONENT' in rsline:  
                     write_en = 0
                     port_def = 0
-                if write_en == 1:
+                elif write_en == 1:
                     for i in range(3):
                         sline = line.split()
-                        print(sline)
-                        sline[0] = sline[0]+'_'+str(i)
-                        print(sline)
-                        d.write('        '+space.join(sline)+'\n')
-                
-        d.write("""
-        end tmr_sem;
+                        if sline[0] == ');': 
+                            #d.write('        '+line)
+                            break
+                        else:
+                            #print(sline)
+                            sline[0] = sline[0]+'_'+str(i)
+                            #print(sline)
+                            port_array.append(space.join(sline))
+                            #d.write('        '+space.join(sline)+'\n')
+
+        #semic.join(port_array[-3,-3]) 
+        sec_to_last = len(port_array)-2
+        third_to_last = len(port_array)-3
+        #print(str(port_array[92])+semic)
+        #semic.join(str(port_array[size-2]))
+        port_array[sec_to_last] = str(port_array[sec_to_last])+semic
+        port_array[third_to_last] = str(port_array[third_to_last])+semic
+        for port in port_array:
+            print(port)
+            d.write('        '+ str(port)+'\n')
+        #for i in range(len(port_array)):
+        #    print(str(port_array(i)))
+        #    d.write('        '+ str(port_array(i))+'\n')
+        d.write(""");\n
+        end;
 
         architecture Behavioral of tmr_sem is
 
@@ -72,6 +97,5 @@ def main(*args):
 
 
 
-if __name__=="__main__":
-    import sys
-    main(*sys.argv)
+if __name__=='__main__':
+    main()
