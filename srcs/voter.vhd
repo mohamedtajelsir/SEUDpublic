@@ -31,7 +31,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity tmrmvoter is
+entity voter is
     Generic (BusWidth : Natural:=3);
     Port    ( Ins : in STD_LOGIC_VECTOR  ( (BusWidth*3) downto 1);
     --Ex of how Inputs are arranged for 3 redundancy and 2 bit buswidth 
@@ -41,9 +41,9 @@ entity tmrmvoter is
      --Ex of how Outputs are arranged for 3 redundancy and 2 bit buswidth
      --Outs[2] is majority voted for A2, B2 and C2
      --Outs[1] is majority voted for A1, B1 and C1
-end tmrmvoter;
+end voter;
 
-Architecture Behavioral of tmrmvoter is
+Architecture Behavioral of voter is
 begin
 
 
