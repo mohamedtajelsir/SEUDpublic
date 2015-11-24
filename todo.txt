@@ -9,6 +9,6 @@
         + instantiate 3 MBs
         + implement generic voter
         + implement a 2-phase timer/counter
-        - implement AXI voter
-        - processor context scrubbing
+        + implement AXI voter
+        + processor context scrubbing
         - frame_ecc to AXI interface
