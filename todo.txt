@@ -1,7 +1,7 @@
 - Next deadline -- Thursday 26 of November at 17:00
 - SEM -- Yous  
-        - implement sem design example 
-        - understand all functionality 
+        + implement sem design example 
+        + understand all functionality 
         - have a working test bench including software
                 - read frame op
                 - inject error
