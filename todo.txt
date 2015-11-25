@@ -11,4 +11,4 @@
         + implement a 2-phase timer/counter
         + implement AXI voter
         + processor context scrubbing
-        - frame_ecc to AXI interface
+        *- frame_ecc to AXI interface
