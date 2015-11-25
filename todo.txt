@@ -2,9 +2,9 @@
 - SEM -- Yous  
         + implement sem design example 
         + understand all functionality 
-        - have a working test bench including software
-                - read frame op
-                - inject error
+        + have a working test bench including software
+                + read frame op
+                +- inject error
 - microblaze -- Tage
         + instantiate 3 MBs
         + implement generic voter
