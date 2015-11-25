@@ -1,0 +1,4 @@
+Tage
+  -Investigate Instruction memory scrubbing
+  -Investigate MCMM scrubbing
+  -Optimize MCMM for area and power
