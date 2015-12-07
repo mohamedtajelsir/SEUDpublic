@@ -1,15 +1,1 @@
-Tage
-  - Investigate Instruction memory scrubbing
-  - Investigate MCMM scrubbing
-      - identify non-config memory element
-      - test the effects of resting the system 
-  - Optimize MCMM for power (area)
-Yous
-  - TMR implementation of SEM
-  - write a test script to inject errors in random location
-  - test state:
-        - init --> observ --> idle
-        - inject error in random location
-        - idle --> observ
-        - wait for ecc error and check correctable flag
-  - 
+
