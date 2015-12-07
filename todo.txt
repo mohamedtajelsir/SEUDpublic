@@ -1,0 +1,30 @@
+Tage
+  - Investigate Instruction memory scrubbing
+  - Investigate MCMM scrubbing
+      - identify non-config memory element
+      - test the effects of resting the system 
+  - Optimize MCMM for power (area)
+Yous
+  - TMR implementation of SEM
+  - write a test script to inject errors in random location
+  - test state:
+        - init --> observ --> idle
+        - inject error in random location
+        - idle --> observ
+        - wait for ecc error and check correctable flag
+
+
+- Last deadline -- Thursday 26 of November at 17:00
+- SEM -- Yous  
+        + implement sem design example 
+        + understand all functionality 
+        + have a working test bench including software
+                + read frame op
+                + inject error
+- microblaze -- Tage
+        + instantiate 3 MBs
+        + implement generic voter
+        + implement a 2-phase timer/counter
+        + implement AXI voter
+        + processor context scrubbing
+        *- frame_ecc to AXI interface
