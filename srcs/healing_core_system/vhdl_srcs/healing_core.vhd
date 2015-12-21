@@ -298,26 +298,26 @@ architecture xilinx_yz of healing_core is
   signal status_essential_internal  : std_logic;
   signal status_uncorrectable_internal  : std_logic;
 
-  signal monitor_txdata0  : std_logic_vector(7 downto 0);
-  signal monitor_txwrite0  : std_logic;
-  signal monitor_txfull0  : std_logic;
-  signal monitor_rxdata0  : std_logic_vector(7 downto 0);
-  signal monitor_rxread0  : std_logic;
-  signal monitor_rxempty0  : std_logic;
-  signal fecc_crcerr0  : std_logic;
-  signal fecc_eccerr0  : std_logic;
-  signal fecc_eccerrsingle0  : std_logic;
-  signal fecc_syndromevalid0  : std_logic;
-  signal fecc_syndrome0  : std_logic_vector(12 downto 0);
-  signal fecc_far0  : std_logic_vector(25 downto 0);
-  signal fecc_synbit0  : std_logic_vector(4 downto 0);
-  signal fecc_synword0  : std_logic_vector(6 downto 0);
-  signal icap_o0  : std_logic_vector(31 downto 0);
-  signal icap_i0  : std_logic_vector(31 downto 0);
-  signal icap_csib0  : std_logic;
-  signal icap_rdwrb0  : std_logic;
-  signal icap_unused0  : std_logic;
-  signal icap_grant0  : std_logic;
+  --signal monitor_txdata0  : std_logic_vector(7 downto 0);
+  --signal monitor_txwrite0  : std_logic;
+  --signal monitor_txfull0  : std_logic;
+  --signal monitor_rxdata0  : std_logic_vector(7 downto 0);
+  --signal monitor_rxread0  : std_logic;
+  --signal monitor_rxempty0  : std_logic;
+  --signal fecc_crcerr0  : std_logic;
+  --signal fecc_eccerr0  : std_logic;
+  --signal fecc_eccerrsingle0  : std_logic;
+  --signal fecc_syndromevalid0  : std_logic;
+  --signal fecc_syndrome0  : std_logic_vector(12 downto 0);
+  --signal fecc_far0  : std_logic_vector(25 downto 0);
+  --signal fecc_synbit0  : std_logic_vector(4 downto 0);
+  --signal fecc_synword0  : std_logic_vector(6 downto 0);
+  --signal icap_o0  : std_logic_vector(31 downto 0);
+  --signal icap_i0  : std_logic_vector(31 downto 0);
+  --signal icap_csib0  : std_logic;
+  --signal icap_rdwrb0  : std_logic;
+  --signal icap_unused0  : std_logic;
+  --signal icap_grant0  : std_logic;
 
 
   signal fecc_crcerr   : std_logic;
