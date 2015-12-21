@@ -1,0 +1,5 @@
+set_property PACKAGE_PIN B22 [get_ports clk]
+set_property PACKAGE_PIN Y13 [get_ports comp_s]
+set_property PACKAGE_PIN T14 [get_ports heal_s]
+set_property IOSTANDARD LVCMOS18 [get_ports comp_s]
+set_property IOSTANDARD LVCMOS18 [get_ports heal_s]

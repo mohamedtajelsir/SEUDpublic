@@ -152,7 +152,7 @@
 -- this was modfied on 09/12/2015
 -- changes made by: Youssef Zaki
 -- TMR implementation
--- triplicated sem_controler and uart module
+-- triplicated sem_controler and uart module with voting logic
 --------------------------------------------------------------------------
 -- for a structural design, the vhdl code becomes less readable, and
 -- it is recommended to generate as much of the vhdl code 
@@ -173,7 +173,7 @@ use unisim.vcomponents.all;
 -- Entity
 -----------------------------------------------------------------------------
 
-entity sem_core_sem_example is
+entity healing_core is
 port (
   clk                           : in    std_logic;
   status_heartbeat              : out   std_logic;
@@ -187,13 +187,13 @@ port (
   monitor_tx                    : out   std_logic;
   monitor_rx                    : in    std_logic
   );
-end entity sem_core_sem_example;
+end entity healing_core;
 
 -----------------------------------------------------------------------------
 -- Architecture
 -----------------------------------------------------------------------------
 
-architecture xilinx of sem_core_sem_example is
+architecture xilinx_yz of healing_core is
 
   ---------------------------------------------------------------------------
   -- Define local constants.
@@ -775,7 +775,7 @@ architecture xilinx of sem_core_sem_example is
   ---------------------------------------------------------------------------
   --
   ---------------------------------------------------------------------------
-end architecture xilinx;
+end architecture xilinx_yz;
 
 -----------------------------------------------------------------------------
 --

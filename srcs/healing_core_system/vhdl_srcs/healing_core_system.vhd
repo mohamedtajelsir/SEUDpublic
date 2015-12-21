@@ -31,7 +31,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity sem_single_core is
+entity healing_core_system is
     Port ( 
               clk                           : in    STD_LOGIC;
               status_heartbeat              : out   std_logic;
@@ -46,9 +46,9 @@ entity sem_single_core is
               uart_rx_in                    : in    std_logic;
               rst                           : in    STD_LOGIC
 	);
-end sem_single_core;
+end healing_core_system;
 
-architecture Behavioral of sem_single_core is
+architecture structural of healing_core_system is
 component clk_wiz 
     port
      (
@@ -59,7 +59,7 @@ component clk_wiz
      );
 end component;
 
-component sem_core_sem_example
+component healing_core
 port (
   clk                           : in    std_logic;
   status_heartbeat              : out   std_logic;
@@ -88,7 +88,7 @@ clk0: clk_wiz
       locked            => open
      );
 
-sem0: sem_core_sem_example
+HC0: healing_core
 port map(
   clk                           => clk_intern,
   status_heartbeat              => status_heartbeat,
@@ -106,4 +106,4 @@ port map(
   uart_tx_out <= uart_tx_intern;
   uart_rx_intern <= uart_rx_in;
 
-end Behavioral;
+end structural;
