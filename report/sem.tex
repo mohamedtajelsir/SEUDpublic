@@ -1,0 +1,243 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               HEALING CORE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Design and Implementation of Healing Core}
+\label{label:HC}
+The Artix-7 FPGA contains two ICAPE2 (Fig.\ref{fig:icap}) units\footnote{Only one ICAP2E (Internal Configuration Access) port can be selected at a time} that enable internal or external controllers to read from and write to the internal configuration memory. These read and write operations can be executed at run-time without interrupting the operation of other blocks in the system. The ICAP becomes available after the completion of the FPGA's configuration, and if the JTAG or SelectMap ports are not accessing the configuration memory. The external ports have higher priority when accessing the configuration memory. JTAG has the highest priority, and is always enabled. The priority to the SelectMap port after JTAG, and then the system defaults to the ICAPE2 if it is instantiated in the design. By default, the top ICAPE2 is selected, and in order to switch to the bottom ICAPE2, bit 30 of the Control Register 0 (CTL0) must be set to 1. The ICAPE2 is part of the hardware architecture the Artix-7 FPGA, and is also susceptible to SEUs, which places a single point of failure in the healing core system.    
+
+The Artix-7 FPGA contains two ICAP2E (Fig.\ref{fig:icap}) units\footnote{Only one ICAP2E (Internal Configuration Access) port can be selected at a time} that enable internal or external controllers to read from and write to the internal configuration memory. These read and write operations can be executed at run-time without interrupting the operation of other blocks in the system. Furthermore, the Artix-7 FPGA provides a FRAME\_ECC \ref{fig:fecc} unit that allows the monitoring of the ECC and readback CRC circuitries of the FPGA \cite{vhdl.xilinx}. With these capability, the system can detect and correct SEUs in the configuration memory of the FPGA, and hence heal itself. 
+
+\begin{figure}[!ht]
+    \centering
+        \includegraphics[trim={0 0 0 0},clip,width=0.5\linewidth]{icap.png}
+        \caption{Xilinx ICAP Primitive \cite{vhdl.xilinx}}
+    \label{fig:icap}
+\end{figure}
+
+Each frame in the configuration memory of the Artix-7 FPGA contains a 13-bit ECC value, and the the entire configuration memory is protected by a 32-bit readback CRC value. The FRAME\_ECC \ref{fig:fecc} unit is a hardware primitive in the Artix-7 FPGA that allows the monitoring of the ECC and readback CRC circuitries of the FPGA. The ECC error flags indicate when an error is detected and where it is located. The SYNDROME value show the bit position within a frame and is indicated by bits[11:0], and bit[12] indicates that the position is unknown. This occurs when you have multiple errors per frame\cite{vhdl.xilinx}. With these capability, the system can detect and correct SEUs in the configuration memory of the FPGA, and hence heal itself.
+
+\begin{figure}[!ht]
+    \center
+        \includegraphics[trim={0 0 0 0},clip,width=0.5\linewidth]{fecc.png}
+        \caption{Xilinx FRAME\_ECC Primitive \cite{vhdl.xilinx}}
+    \label{fig:fecc}
+\end{figure}
+
+\subsection{Healing Approach}
+The two basic strategies for correcting errors in the configuration memory are: 
+
+\begin{itemize}
+    \item Blind scrubbing -- periodic replacement of configuration memory frames without any error detection mechanism 
+    \item Readback scrubbing -- implements error detection and correction (ECC) algorithm to detect and correct one-bit within a frame \cite{Brosser2014}
+\end{itemize}
+
+The blind scrubbing approach has the lowest design complexity, but results in an inefficient utilization of the scrubber's time, and while the readback scrubbing is efficient, it cannot correct more than one-bit per frame. A solution that combines characteristics from the two approaches will provide both efficiency and reliability. This can be achieved by implementing a mechanism that checks via ECC first, and if more than one error occur, replaces the entire frame. More sophisticated approaches exist that can dynamically scale scrubbing frequency based on either orbit position, power consumption, or some other system parameter. Also, prioritize critical bits in the system and perform more frequency checks can increase the reliability of the system.  
+
+\subsection{Healing Implementation Options}
+There are a variety of methods available to implement the healing mechanism. Typically the healing unit targeted for space applications use an external radiation hardened device that is immune to SEU \cite{Brosser2014}. This devices can then directly access the Artix-7's configuration memory registers via the SelectMap, JTAG, or the serial port, and perform read and write operations. This method separated the healing unit from the main FPGA, but does not allow the Artix-7 FPGA system to demonstrate the desired self-healing feature. Alternatively, the healing unit can be implemented internally to show the self-healing feature of the system. This also results in a more efficient implementation in time and energy because the communication between the healing core and the Artix-7's configuration memory registers is local.  
+
+The scrubber, whether internal or external, can be implemented in hardware or software. The software approach provides more flexibility in the scrubbing algorithm, but is in general much slower than a hardware implementation because the algorithm executes in a general purpose processor that is not optimized for that particular algorithm. A compromise between software and hardware can result in an efficient implementation. Such a solution suggests the use of a pure hardware scrubber implementation internal to the Artix-7 FPGA (i.e. Healing Core), and soft-processor implemented in the auxiliary SF2 FPGA. Since the SF2 FPGA fabric is immune to SEUs, it is a suitable candidate to replace the expensive radiation hardened processor. Also, Xilinx provides a Soft-Error Mitigation core which is a hardware solution for the healing core.
+
+\subsection{Soft-Error Mitigation Core}
+Xilinx provides a Soft Error Mitigation (SEM) core that can be used as a starting point for the design of the healing core. The advantage of the SEM core is that it is implemented in hardware, and operates independent of the rest of the system. Therefore, its detection and correction functionality can run in the background and does not interfere with the computational core in the Artix-7 FPGA. The SEM core has three correction modes, but only a single mode can be selected during the core's generation. 
+
+\begin{itemize}
+    \item Repair -- employs ECC algorithm to detect bit errors in a frame, but can only correct one-bit error per frame
+    \item Enhanced Repair -- uses ECC and CRC algorithms to detect bit errors in a frame and correct up to two adjacent bit errors
+    \item Replace -- reloads the entire frame from external memory when an error occurs
+\end{itemize}   
+
+The repair mode provides an efficient method to correct a single bit error per frame. It has a low initialization\footnote{\label{note1}Period value scales linearly with frequency} period of 554 ms at 10 MHz frequency. The enhanced repair is a better option to perform error correction, but unfortunately it has a large initialization period of 66 second, and requires 180 ms to perform 2-adjacent-bit correction\textsuperscript{\ref{note1}} at 10 Mhz frequency. Lastly, the replace mode provides a correction approach that is immune to the number of SEUs per frame, but is the least efficient because it has to replace the target frame every time an SEU is detected. This is especially relevant when the frames are stored in an external memory \cite{SEM.Xilinx-15}.  
+
+\begin{figure}[!ht]
+    \centering
+        \includegraphics[trim={0 0 0 0},clip,width=0.8\linewidth]{sem.pdf}
+        \caption{Xilinx SEM IP Core \cite{SEM.Xilinx-15}}
+    \label{fig:sem}
+\end{figure}
+
+\subsubsection{SEM Core Interface}
+A high-level view of the interfaces of the SEM core can be seen in Fig.\ref{fig:sem}. The SEM core provides Status Interface signals that indicate changes in the behavior of the SEM core. These signals are an important communicating component with the BAHC in the SF2 FPGA Fig.\ref{fig:HCSF2}. The SEM core also provides Monitor and Fetch Interface signals that can be used to exchange information with an external unit such as a UART controller or processor. As described in Sec.\ref{label:hbehav}, the SEM controller has different behavioral states, and this feature facilitates the task of sending commands and receiving status reports. 
+
+The Error Injection Interface allows the user to issue error injection and other commands to the SEM controller. This interface can be connected to external switches, controller, or to Xilinx's Chipscope Pro tool, and using the error injection instructions in \cite{SEM.Xilinx-15} the user can directly flip a single bit in a target configuration memory frame. When injecting more than one error per frame, the user would simply target a different bit in the same frame, and issue consecutive error injection commands. Alternatively, errors can be injected via the monitor interface\footnote{In order for the error injections to take affect, the error injection option must be selected during IP configuration}. The monitor interface accepts ASCII codes as described in \cite{SEM.Xilinx-15} supersede the effect of the Error Injection Interface signals.   
+
+The SEM core can access the configuration memory register of the Artix-7 FPGA via a point-to-point connection between the ICAP2E primitive and the ICAP Interface. Similarly, through a point-to-point connection between the FRAME\_ECC primitive and the FRAME\_ECC Interface, the SEM core can look into the error detection functionality of the Artix-7 FPGA. 
+
+While the SEM core provides essential functionality for scrubbing and testing the system, it is not fault-tolerant, does not provide a repaire mode that combines ECC check and frame replace, and may not achieve the desired system reliability. Furthermore, the SEM core does not contain a means to heal itself, and hence becomes a single point of failure for the system. Consequently, a healing core is designed to includes Redundancy blocks, a repair or replace mode, and an external communication mechanism to initiate full/partial system reconfiguration.
+
+\subsection{SEM System}
+Xilinx provides a working design example of an SEM system as shown in Fig.\ref{fig:semsys}. This example contains an instance of the ICAP2E and Frame\_ECC primitives, and the SEM core. Also, the example includes a system monitor component that handles the communication between the SEM core and external entities. The system monitor uses UART serial communication with a default speed\footnote{The uart speed can be changed by setting the V\_ENABLETIME valriable in the VHDL entry. For calculating the required value for the desired baudrate check \cite{SEM.Xilinx-15} p.37} setting of 9600 bits per second. The UART controller manages the read and write operations into the receive and transmit buffers, and performs data serialization and deserialization operations. The clocking wizard block is not part of the SEM system example, but is added to the system in order to vary frequency and observe its effect on power.
+
+\begin{figure}[!ht]
+    \centering
+        \includegraphics[trim={2cm 8cm 2cm 7cm},clip,width=\linewidth]{sem_sys.pdf}
+        \caption{Block Diagram of the SEM System}
+    \label{fig:semsys}
+\end{figure}
+
+
+\subsection{Healing Core Architecture}
+Fig.\ref{fig:HCSF2} shows the current system level architecture of the healing core (HC). The healing core is a TMR implementation of the SEM system. This aproach triplicates the SEM core and system monitor blocks, and uses single and TMR majority voter blocks to check internal and external communication signals. The single voter unit is used whenever the signals converge into a single unit. This scenario occurs when a design block cannot be replicated or when a single result is desired. As can be seen in Fig.\ref{fig:HCSF2}, a single voter is implemented at the input signals of the ICAP because the primitive hardware unit cannot be replicated. Moreover, in order for the BAHC unit in the SF2 FPGA to check the correctness of the status and UART communication signals a single majority voter unit is implemented. The latter produces a single result as is desired by the BAHC block\footnote{This is a design decision that could still be changed depending on the final implementation of the BAHC}. Other instances such as the connections between the SEM cores and the system monitor require a TMR implementation of the voter blocks, which is apperant from the difference between Fig.\ref{fig:semsys} and Fig.\ref{fig:HCSF2}, and is pictorially described in more detail in Fig.\ref{fig:tmrvoter}.  
+
+\begin{figure}[!ht]
+    \centering
+        \includegraphics[trim={0cm 7cm 0cm 2cm},clip,width=\linewidth]{HCSF2.pdf}
+        \caption{Block Diagram of the Healing Core and its Interface with the SF2 FPGA}
+    \label{fig:HCSF2}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+        \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=\linewidth]{tmr.pdf}
+        \caption{Block Diagram of a TMR 3-Input Majority Voter}
+    \label{fig:tmrvoter}
+\end{figure}
+
+\subsection{Healing Core Behavior}
+\label{label:hbehav}
+The behavior of the healing core follows the behavior of the SEM core with the addition of the different correction mechanism. This behavior is described in great detail in \cite{SEM.Xilinx-15}, and is summarized in this section.
+
+\subsubsection{Healing Core States}
+The description of the states is modified to fit the functionality
+Fig.\ref{fig:hcsd}
+
+\begin{itemize}
+    \item Init -- initializes the HC system and transitions to the observation state.
+    \item Observation -- controller can perform frame read operations of the configuration memory, and monitor the output of the Frame\_ECC block. State transitions to the correction state when an error is detected.
+    \item Correction -- determines correction mechanism. When a single-bit error is detected the state uses the ECC algorithm to correct the error, and can only correct a single-bit error. When more than one bit error is detected the state sends a STATUS\_UNCORRECTABLE signal the BAHC unit along with an error correction report via the UART interface. These signals prompt the BAHC to fetch the target frame from the reference memory and perform a replacement operation through the SelectMap port via partial reconfiguration. In the latter event, the BAHC has to place the healing core in idle state before accessing the configuration memory though the SelectMap port\footnote{According to \cite{Configuration.Xilinx-15}, the SelectMap is a super set of the ICAP, and both ports have the same functionality. Therefore, in order to avoid conflict when accessing the configuration memory, it is recommended not to use both ports simultaneously.}.
+    \item Idle -- allows the user to issue enter the error injection state. 
+    \item Injection -- performs a read-modify-write operation to a selected frame after receiving a valid error injection command. This operation enables the user to flip a single bit in a frame and test the healing capabilities of the system. After the error injection is complete the core returns to the idle state, and must be moved back the observation state in order to correct the injected errors.
+    \item Fatal Error -- can occur due to an internal inconsistency such as an SEU in the configuration of the healing core. This state is indicated by the assertion of all five state signals from the status interface signals. In this situation the BAHC must initialize a partial or full FPGA reconfiguration. 
+\end{itemize}
+
+\begin{figure}[!ht]
+    \centering
+        \includegraphics[trim={0 13cm 0 5cm},clip,width=0.8\linewidth]{hc_op.pdf}
+        \caption{Healing Core Behavioral Model \cite{SEM.Xilinx-15}}
+    \label{fig:hcsd}
+\end{figure}
+
+\section{Healing Core}
+The healing core in Fig\ref{semtmr} is a TMR version of Xilinx's SEM IP, which is a hardware implementated soft error mitigation (SEM) system. It also includes a MMCMU core to generate the required clock. The SEM core contains the ICAP2E and FRAME_ECC2E primitives, a SEM controller, and UART controller Fig\ref{sem}. 
+
+
+\subsection{Testing Framework}
+The testing framework consists of the integrated system Fig.\ref{fig:integratedsystem} implemented on the Artix-7 FPGA that is part of the Nexys Video board (Fig.\ref{fig:nexysvideo}). The development board is connected to a PC running a Python script that follows a testing pattern according to the flowchart in Fig.\ref{fig:flowchart}. This application uses the Python Serial library to communicate via the UART channel. The script also uses the time library to set the period for error injection, and the random library to generate a random frame, word, and bit to target during the error injection. Only the initialization, observation, and heartbeat status flags of the healing core system were attached to LEDs for debugging purposes, the remaining flags were not used during the system integration testing, but their functionality was validated during an initial healing core system test. From the conputation core, two TMR MicroBlaze systems ran an application that periodically cause an LED to blink. This is not a thorough test of the system, but served as an initial validation of the mojority voting, and error injection and correction scheme.
+
+\begin{figure}[!ht]
+    \centering
+        \includegraphics[trim={0 4cm 0 4cm},clip,width=\linewidth]{test_struct.pdf}
+        \caption{Testing Framework}
+    \label{fig:tstruct}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+        \includegraphics[trim={0 4cm 0 4cm},clip,width=\linewidth]{artix_tb.pdf}
+        \caption{Python Script for Testing the Integrated System}
+    \label{fig:flowchart}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+The HC is a TMR version of the SEM core in replace mode. 
+
+ The core's controller, and UART module are derived from the SEM c implemented in TMR configuration to increase the system's reliability. The tripple modular redundant (TMR) implementation requires voters blocks to minimize error propagation due to SEUs. Unfortunately, the Artix-7 FPGA allows access to one ICAP at a time. As a result, redundancy in the ICAP is not possible. 
+
+ of the controller includes voter blocks that check the communication between  block that verifies the output of the TMR controller. The voter follows the majority voter rule and is only needed for write operation. 
+
+
+In addition to the ICAP voter, HC also contains a context integrity restoration block that provides the necessary logic to validate the context of the MMR controller. The healing core will provide communication ports internally to the CC and externally to the BAHC. The former is required to communicate statistical information about the occurence of SEUs in the FPGA, and the latter is used to inform the BAHC about the working status of the healing core. Lastly, the healing core include an ICAP block to enable read and write operations of the configuration memory and a Frame\_ECC block to enable error detection.
+%%%%%%%%%%%
+%%%%%%%%%%%
+
+\subsection{SEM}
+
+ The SEM core can be instantiated with three different scurbbing modes:
+\begin{itemized}
+	\item Enhanced Mode:
+\end{itemized} 
+
+%%%%%%%%%%%%%%%
+Report -- sends statistical data regarding SEUs to the desired target, either communicate to work-station during development or to BAHC in order to deliver data to OBC during on-line operation
+
+- new idea for correcting errors in the configuration memory
+    - use the healing core as is for the replace state
+    - the core send a report whenever an error is detected
+    - the BAHC can use the frame address in the report to locate the frame in the reference memory
+    - find the location of the error bits by comparing the 
+%%%%%%%%%%%%%%%
+
+- finish the healing core section
+    + architecture
+    + behavior
+    - role of BAHC
+        - poll status and uart vs interrupt
+        - scrub Artix-7 via SelectMap
+        - load frame from reference memory to Artix-7 configuration memory
+        - initiate full system reconfiguration
+        - monitor the Artix
+        - watchdog timer option
+            - can use status heartbeat signal to signal still-alive message
+            - The heartbeat signal can be used together with the watchdog timer in the SF2 FPGA to check if status of the healing core in the Artix-7 FPGA. The heartbeat signal is by default goes high every 150 clock cycles, and indicates the system is functioning properly.
+        - use uart to transmit status
+            - bottle neck is the communication speed
+            - recommended to disable the uart during online system runs.
+            - use status flags to
+        - use error injection interface to move the healing core from observation state to idle state instead of sending commands throught the uart interface
+            - this method is much faster
+            - in order for the controller to ignor the uart tx/rx buffer full signal, tie that signal "high" (not sure check data sheet)
+            and only use the error injection interface
+            - this method can increase the speed of switching the core between states, however only the upper 4 MSBs are required to switch the state of the core, the rest of the pins are don't cares, and can be tied to ground.
+        - how to respond to different status flags
+            - single error
+            - double or multipe error
+            - read frame address
+            - send command to put the healing core in idle state
+            - uart vs other communication method (SPI)
+            - 
+        - testing structure
+            - python script
+                - required libraries
+                - windows vs linux serial port setup
+                - flow chart for error injection and logging
+                - how to modify the script
+                    - which variables control what?
+                - number of frames in Artix-7
+                - number of words per frame
+                - how to address a frame, word, and bit
+                    - linear addressing vs hardware addressing
+        - results
+            - implemented test
+            - collected data and conclusions
+
+Furthermore, this feature is essential during the testing phase of the system
+
+  - tools
+  - SEM IP core and describ alternatives (soft-core implementation)
+    - optional TMR implementation
+    - switching ICAP control
+    - switching ICAPs
+    - interface
+    - frame correction via ecc and/or crc
+    - frame replace 
+  - [optional] implement XADC
+  - testing 
+    - testing interface
+	  - inject single error per time unit
+	  - request report
+	  - describ testing script
+
+      \begin{itemize}
+    \item Init -- initializes the HC system and transitions to the observation state.
+    \item Observation -- controller can perform frame read operations of the configuration memory, and monitor the output of the Frame\_ECC block. State transitions to the correction state when an error is detected.
+    \item Correction -- determines correction mechanism. When a single-bit error is detected the state uses the ECC algorithm to correct the error, and when more than one bit error is detected the state signals the BAHC to replace the entire frame. 
+    \item ECC algorithm\footnote{\label{note1} The state returns to the observe state after completing the error correction} -- performs correction via ECC algorithm and can only correct one single-bit error.
+    \item Replace\textsuperscript{\ref{note1}} --  sends a STATUS\_UNCORRECTABLE signal the BAHC unit along with a error correction report via the UART interface. These signals signal the BAHC to fetch the target frame from the reference memory and perform a replacement operation through the SelectMap port via partial reconfiguration.
+    \item Idle -- allows the user to issue enter the error injection state. 
+    \item Inject\_errors -- performs a read-modify-write operation to a selected frame after receiving a valid error injection command. This operation enables the user to flip a single bit in a frame and test the healing capabilities of the system. After the error injection is complete the core returns to the idle state, and must be moved back the observation state in order to correct the injected errors.
+    \item Fatal Error -- can occur due to an internal inconsistency such as an SEU in the configuration of the healing core. This state is indicated by the assertion of all five state signals from the status interface signals. In this situation the BAHC must initialize a partial or full FPGA reconfiguration. 
+\end{itemize}
+
+
+. as its core unit, the behavior of the healing core is divided into a heal phase and sync phase. During the heal phase, the core can observe and correct errors, and during the sync phase the core can validate the context of the MMR controller. As can be seen in Fig. \ref{fig:hcop}, the heal phase will be divided into the following set of states:
