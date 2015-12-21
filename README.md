@@ -29,6 +29,7 @@
     - Import the healing\_core\_system directory into a new project
     - It is recommended however to instantiate a the SEM core for each new project.
         - If you follow this option you have to change the entity name to match rest of the files
+
 ### IP Repo
 - ip\_repo are ips that can be added to ip based design, such as a microblaze processor system
 - se\_single\_core is essentially a non-tmr version of the healing core. 
