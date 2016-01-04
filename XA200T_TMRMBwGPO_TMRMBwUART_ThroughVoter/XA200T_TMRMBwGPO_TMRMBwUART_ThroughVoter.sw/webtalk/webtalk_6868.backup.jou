@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2015.4 (64-bit)
+# SW Build 1412921 on Wed Nov 18 09:43:45 MST 2015
+# 
+# Start of session at: Sat Dec 12 08:12:18 2015
+# Process ID: 6868
+# Current directory: D:/SEUDProject/XA200T_TMRMBwGPO_TMRMBwUART_ThroughVoter/XA200T_TMRMBwGPO_TMRMBwUART_ThroughVoter.sw/webtalk
+# Command line: wbtcv.exe -mode batch -source sdk_webtalk.tcl
+# Log file: D:/SEUDProject/XA200T_TMRMBwGPO_TMRMBwUART_ThroughVoter/XA200T_TMRMBwGPO_TMRMBwUART_ThroughVoter.sw/webtalk/webtalk.log
+# Journal file: D:/SEUDProject/XA200T_TMRMBwGPO_TMRMBwUART_ThroughVoter/XA200T_TMRMBwGPO_TMRMBwUART_ThroughVoter.sw/webtalk\webtalk.jou
+#-----------------------------------------------------------
+source sdk_webtalk.tcl

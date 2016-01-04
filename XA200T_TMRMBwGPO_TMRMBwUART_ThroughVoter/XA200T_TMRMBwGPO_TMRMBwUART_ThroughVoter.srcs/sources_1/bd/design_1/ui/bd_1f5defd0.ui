@@ -1,0 +1,237 @@
+{
+   guistr: "# # String gsaved with Nlview 6.5.5  2015-06-26 bk=1.3371 VDI=38 GEI=35 GUI=JA:1.6
+#  -string -flagsOSRD
+preplace port reset_rtl -pg 1 -y 1900 -defaultsOSRD
+preplace port uart_rtl_rxd -pg 1 -y 950 -defaultsOSRD -right
+preplace port reset_rtl_0 -pg 1 -y 1990 -defaultsOSRD
+preplace port clock_rtl -pg 1 -y 1880 -defaultsOSRD
+preplace portBus gpio_rtl -pg 1 -y 3340 -defaultsOSRD
+preplace portBus uart_rtl_txd -pg 1 -y 860 -defaultsOSRD
+preplace portBus gpio_rtl1 -pg 1 -y 40 -defaultsOSRD
+preplace inst microblaze_2_clk_wiz_1 -pg 1 -lvl 4 -y 760 -defaultsOSRD
+preplace inst tmrit_0 -pg 1 -lvl 3 -y -470 -defaultsOSRD
+preplace inst microblaze_2_axi_periph -pg 1 -lvl 8 -y 190 -defaultsOSRD
+preplace inst tmrit_1 -pg 1 -lvl 5 -y 2370 -defaultsOSRD
+preplace inst microblaze_0_axi_periph -pg 1 -lvl 8 -y 2580 -defaultsOSRD
+preplace inst lmb_bram2 -pg 1 -lvl 7 -y -980 -defaultsOSRD
+preplace inst microblaze_5_axi_periph -pg 1 -lvl 8 -y 3480 -defaultsOSRD
+preplace inst microblaze_5_clk_wiz_1 -pg 1 -lvl 4 -y 3440 -defaultsOSRD
+preplace inst microblaze_2_xlconcat -pg 1 -lvl 8 -y 490 -defaultsOSRD
+preplace inst microblaze_4_xlconcat -pg 1 -lvl 10 -y 3110 -defaultsOSRD
+preplace inst lmb_bram3 -pg 1 -lvl 7 -y -460 -defaultsOSRD
+preplace inst clk_wiz_1 -pg 1 -lvl 4 -y 2650 -defaultsOSRD
+preplace inst lmb_bram4 -pg 1 -lvl 7 -y -750 -defaultsOSRD
+preplace inst microblaze_4_axi_periph -pg 1 -lvl 8 -y 3100 -defaultsOSRD
+preplace inst microblaze_4_clk_wiz_1 -pg 1 -lvl 4 -y 3080 -defaultsOSRD
+preplace inst microblaze_0_local_memory -pg 1 -lvl 7 -y 2830 -defaultsOSRD
+preplace inst rst_microblaze_4_clk_wiz_1_100M -pg 1 -lvl 5 -y 3050 -defaultsOSRD
+preplace inst microblaze_0 -pg 1 -lvl 7 -y 3050 -defaultsOSRD
+preplace inst microblaze_1 -pg 1 -lvl 7 -y 1830 -defaultsOSRD
+preplace inst microblaze_5_local_memory -pg 1 -lvl 7 -y 3820 -defaultsOSRD
+preplace inst microblaze_2 -pg 1 -lvl 7 -y 1300 -defaultsOSRD
+preplace inst microblaze_3 -pg 1 -lvl 7 -y 860 -defaultsOSRD
+preplace inst tmrmvoter_3 -pg 1 -lvl 11 -y 870 -defaultsOSRD
+preplace inst tmrmvoter_4 -pg 1 -lvl 13 -y 40 -defaultsOSRD
+preplace inst microblaze_1_local_memory -pg 1 -lvl 7 -y 1130 -defaultsOSRD
+preplace inst axi_gpio_0 -pg 1 -lvl 11 -y 3200 -defaultsOSRD
+preplace inst microblaze_4 -pg 1 -lvl 7 -y 3500 -defaultsOSRD
+preplace inst tmrmvoter_5 -pg 1 -lvl 13 -y 3350 -defaultsOSRD
+preplace inst axi_uartlite_0 -pg 1 -lvl 9 -y 830 -defaultsOSRD
+preplace inst axi_gpio_1 -pg 1 -lvl 11 -y 3360 -defaultsOSRD
+preplace inst microblaze_5 -pg 1 -lvl 7 -y 3990 -defaultsOSRD
+preplace inst microblaze_1_clk_wiz_1 -pg 1 -lvl 4 -y 1240 -defaultsOSRD
+preplace inst axi_uartlite_1 -pg 1 -lvl 9 -y 660 -defaultsOSRD
+preplace inst AXItmrmvoter_0 -pg 1 -lvl 1 -y 970 -defaultsOSRD
+preplace inst axi_gpio_2 -pg 1 -lvl 11 -y 3530 -defaultsOSRD
+preplace inst axi_uartlite_2 -pg 1 -lvl 9 -y 1410 -defaultsOSRD
+preplace inst axi_gpio_3 -pg 1 -lvl 11 -y 10 -defaultsOSRD
+preplace inst microblaze_3_clk_wiz_1 -pg 1 -lvl 4 -y 290 -defaultsOSRD
+preplace inst axi_gpio_4 -pg 1 -lvl 11 -y 130 -defaultsOSRD
+preplace inst memconformitymodule_0 -pg 1 -lvl 6 -y -950 -defaultsOSRD
+preplace inst axi_gpio_5 -pg 1 -lvl 11 -y 250 -defaultsOSRD
+preplace inst microblaze_3_axi_periph -pg 1 -lvl 8 -y 1400 -defaultsOSRD
+preplace inst memconformitymodule_1 -pg 1 -lvl 6 -y -680 -defaultsOSRD
+preplace inst microblaze_5_axi_intc -pg 1 -lvl 9 -y 3500 -defaultsOSRD
+preplace inst microblaze_3_xlconcat -pg 1 -lvl 8 -y 1680 -defaultsOSRD
+preplace inst microblaze_4_local_memory -pg 1 -lvl 7 -y 3330 -defaultsOSRD
+preplace inst microblaze_1_xlconcat -pg 1 -lvl 8 -y 1090 -defaultsOSRD
+preplace inst memconformitymodule_2 -pg 1 -lvl 6 -y -420 -defaultsOSRD
+preplace inst rst_microblaze_5_clk_wiz_1_100M -pg 1 -lvl 5 -y 3450 -defaultsOSRD
+preplace inst microblaze_1_axi_periph -pg 1 -lvl 8 -y 790 -defaultsOSRD
+preplace inst microblaze_5_xlconcat -pg 1 -lvl 10 -y 3460 -defaultsOSRD
+preplace inst rst_clk_wiz_1_100M -pg 1 -lvl 5 -y 2630 -defaultsOSRD
+preplace inst xlconcat_0 -pg 1 -lvl 10 -y 860 -defaultsOSRD
+preplace inst microblaze_0_xlconcat -pg 1 -lvl 10 -y 2700 -defaultsOSRD
+preplace inst microblaze_0_axi_intc -pg 1 -lvl 9 -y 2680 -defaultsOSRD
+preplace inst xlconcat_1 -pg 1 -lvl 12 -y 3350 -defaultsOSRD
+preplace inst microblaze_2_axi_intc -pg 1 -lvl 9 -y 480 -defaultsOSRD
+preplace inst xlconcat_2 -pg 1 -lvl 12 -y 40 -defaultsOSRD
+preplace inst rst_microblaze_2_clk_wiz_1_100M -pg 1 -lvl 5 -y 790 -defaultsOSRD
+preplace inst xlconcat_3 -pg 1 -lvl 2 -y -490 -defaultsOSRD
+preplace inst microblaze_3_local_memory -pg 1 -lvl 7 -y 1640 -defaultsOSRD
+preplace inst microblaze_1_axi_intc -pg 1 -lvl 9 -y 1250 -defaultsOSRD
+preplace inst microblaze_4_axi_intc -pg 1 -lvl 9 -y 3100 -defaultsOSRD
+preplace inst xlconcat_4 -pg 1 -lvl 4 -y 2360 -defaultsOSRD
+preplace inst microblaze_2_local_memory -pg 1 -lvl 7 -y 690 -defaultsOSRD
+preplace inst rst_microblaze_3_clk_wiz_1_100M -pg 1 -lvl 5 -y 260 -defaultsOSRD
+preplace inst mdm_1 -pg 1 -lvl 1 -y 1950 -defaultsOSRD
+preplace inst microblaze_3_axi_intc -pg 1 -lvl 9 -y 1800 -defaultsOSRD
+preplace inst rst_microblaze_1_clk_wiz_1_100M -pg 1 -lvl 5 -y 1220 -defaultsOSRD
+preplace netloc microblaze_4_intc_axi 1 8 1 3860
+preplace netloc microblaze_3_interrupt 1 6 4 NJ 430 NJ 430 NJ 380 4550
+preplace netloc microblaze_2_axi_periph_M03_AXI 1 8 1 4000
+preplace netloc rst_microblaze_5_clk_wiz_1_100M_bus_struct_reset 1 5 2 NJ 3430 2030
+preplace netloc memconformitymodule_2_datao 1 6 1 2000
+preplace netloc memconformitymodule_2_add 1 6 1 1990
+preplace netloc microblaze_1_Clk 1 0 11 NJ -310 NJ -310 NJ -310 NJ -310 1010 -310 1520 -310 2070 -40 3100 -40 3980 10 NJ 10 NJ
+preplace netloc microblaze_3_axi_dp 1 7 1 3050
+preplace netloc axi_gpio_2_gpio_io_o1 1 11 1 NJ
+preplace netloc rst_microblaze_4_clk_wiz_1_100M_interconnect_aresetn 1 5 3 NJ 3070 NJ 3140 NJ
+preplace netloc microblaze_4_axi_periph_M03_AXI 1 8 3 NJ 3250 NJ 3250 NJ
+preplace netloc microblaze_2_axi_dp 1 7 1 2970
+preplace netloc microblaze_0_axi_periph_M03_AXI 1 8 3 NJ 2550 NJ 2550 4830
+preplace netloc memconformitymodule_1_datao 1 6 1 2000
+preplace netloc microblaze_3_ilmb_int 1 7 1 3060
+preplace netloc axi_gpio_1_gpio_io_o 1 11 1 5100
+preplace netloc microblaze_3_dlmb_axi 1 6 3 NJ 990 NJ 1030 3840
+preplace netloc xlconcat_2_dout 1 12 1 N
+preplace netloc microblaze_3_ilmb_axi 1 6 3 NJ 1010 NJ 1020 3860
+preplace netloc memconformitymodule_1_rw 1 6 1 2020
+preplace netloc rst_microblaze_1_clk_wiz_1_100M_mb_reset 1 5 4 NJ -300 NJ -120 NJ -120 NJ
+preplace netloc rst_microblaze_2_clk_wiz_1_100M_mb_reset 1 5 4 NJ -560 NJ -110 NJ -110 NJ
+preplace netloc xlconcat_1_dout 1 12 1 N
+preplace netloc memconformitymodule_0_add 1 6 1 1990
+preplace netloc axi_uartlite_0_tx 1 9 1 N
+preplace netloc microblaze_1_axi_periph_M05_AXI 1 8 3 NJ -10 NJ -10 NJ
+preplace netloc microblaze_0_intc_axi 1 8 1 3870
+preplace netloc microblaze_0_dlmb_1 1 6 2 NJ 2710 NJ
+preplace netloc rst_microblaze_3_clk_wiz_1_100M_peripheral_aresetn 1 0 11 NJ 1120 NJ 1120 NJ 1120 NJ 1120 NJ 1120 1480 1120 1990 1400 3100 1180 4050 270 NJ 270 NJ
+preplace netloc microblaze_3_axi_periph_M04_AXI 1 0 9 NJ 1110 NJ 1110 NJ 1110 NJ 1110 NJ 1110 NJ 1110 NJ 980 NJ 1150 3850
+preplace netloc xlconcat_0_dout 1 10 1 4840
+preplace netloc microblaze_1_clk_wiz_1_locked 1 4 1 1020
+preplace netloc rst_microblaze_1_clk_wiz_1_100M_peripheral_aresetn 1 0 11 NJ 1320 NJ 1320 NJ 1320 NJ 1320 NJ 1320 1470 1260 2100 1380 3020 1160 4060 30 NJ 30 NJ
+preplace netloc rst_microblaze_5_clk_wiz_1_100M_peripheral_aresetn 1 5 6 NJ 3490 1990 3610 3100 3710 3960 3630 NJ 3550 NJ
+preplace netloc microblaze_2_axi_periph_M05_AXI 1 8 3 3880 110 NJ 110 NJ
+preplace netloc microblaze_3_axi_periph_M03_AXI 1 8 1 3930
+preplace netloc microblaze_3_ilmb_1 1 6 2 NJ 940 NJ
+preplace netloc microblaze_1_axi_periph_M03_AXI 1 8 1 3960
+preplace netloc memconformitymodule_0_rw 1 6 1 2040
+preplace netloc rst_clk_wiz_1_100M_mb_reset 1 5 4 NJ 2590 NJ 2380 NJ 2380 NJ
+preplace netloc microblaze_4_clk_wiz_1_locked 1 4 1 N
+preplace netloc microblaze_4_axi_dp 1 7 1 3060
+preplace netloc clock_rtl_1 1 0 4 NJ 1840 NJ 1840 NJ 1840 570
+preplace netloc microblaze_3_clk_wiz_1_locked 1 4 1 N
+preplace netloc microblaze_1_intr 1 8 1 3940
+preplace netloc microblaze_5_Clk 1 3 8 600 3360 1030 3360 NJ 3360 2010 3690 3090 3690 3910 3620 NJ 3530 NJ
+preplace netloc microblaze_2_axi_periph_M04_AXI 1 0 9 NJ 1100 NJ 950 NJ 950 NJ 950 NJ 950 NJ 950 NJ 950 NJ 1010 3870
+preplace netloc microblaze_5_dlmb_1 1 6 2 2170 4070 2920
+preplace netloc microblaze_2_intc_axi 1 8 1 4030
+preplace netloc microblaze_2_interrupt 1 6 4 NJ 420 NJ 420 NJ 350 4600
+preplace netloc microblaze_1_dlmb_axi 1 6 3 NJ 530 NJ 560 3840
+preplace netloc rst_microblaze_1_clk_wiz_1_100M_bus_struct_reset 1 5 2 NJ 1170 NJ
+preplace netloc rst_microblaze_5_clk_wiz_1_100M_mb_reset 1 5 4 NJ 3410 NJ 3700 NJ 3700 4030
+preplace netloc rst_clk_wiz_1_100M_bus_struct_reset 1 5 2 NJ 2610 2140
+preplace netloc microblaze_4_interrupt 1 6 4 NJ 3680 NJ 3680 NJ 3680 4550
+preplace netloc microblaze_3_dlmb_1 1 6 2 NJ 540 NJ
+preplace netloc lmb_bram2_douta 1 5 2 1500 -1060 NJ
+preplace netloc rst_microblaze_1_clk_wiz_1_100M_interconnect_aresetn 1 5 3 1520 510 NJ 510 NJ
+preplace netloc microblaze_5_ilmb_int 1 7 3 NJ 3730 NJ 3730 NJ
+preplace netloc microblaze_1_dlmb_int 1 7 1 2980
+preplace netloc microblaze_5_intr 1 8 3 4070 3610 NJ 3610 4800
+preplace netloc rst_microblaze_2_clk_wiz_1_100M_interconnect_aresetn 1 5 3 NJ 70 NJ 70 NJ
+preplace netloc microblaze_4_debug 1 1 6 NJ 1970 NJ 1970 NJ 1970 NJ 1970 NJ 1970 NJ
+preplace netloc microblaze_1_ilmb_axi 1 6 3 NJ 550 NJ 550 3860
+preplace netloc microblaze_0_ilmb_1 1 6 2 NJ 2960 NJ
+preplace netloc rst_microblaze_4_clk_wiz_1_100M_peripheral_aresetn 1 5 6 NJ 3090 2020 3170 3100 2900 3890 3000 NJ 3000 NJ
+preplace netloc rst_microblaze_4_clk_wiz_1_100M_bus_struct_reset 1 5 2 NJ 3030 2090
+preplace netloc microblaze_5_intc_axi 1 8 1 NJ
+preplace netloc microblaze_0_interrupt 1 6 4 2220 2970 2990 2810 NJ 2810 4550
+preplace netloc microblaze_0_ilmb_int 1 7 3 NJ 2770 NJ 2580 NJ
+preplace netloc microblaze_2_clk_wiz_1_locked 1 4 1 1020
+preplace netloc microblaze_5_clk_wiz_1_locked 1 4 1 1030
+preplace netloc microblaze_4_intr 1 8 3 4070 3200 NJ 3200 4790
+preplace netloc microblaze_3_intc_axi 1 8 1 3940
+preplace netloc lmb_bram4_douta 1 5 2 1520 -580 NJ
+preplace netloc mdm_1_debug_sys_rst 1 1 4 NJ 2010 NJ 2010 NJ 2010 NJ
+preplace netloc rst_microblaze_4_clk_wiz_1_100M_mb_reset 1 5 4 NJ 3010 NJ 3200 NJ 3290 NJ
+preplace netloc microblaze_4_dlmb_int 1 7 3 NJ 2870 NJ 2870 NJ
+preplace netloc microblaze_4_ilmb_axi 1 6 3 2150 3210 2910 3280 3840
+preplace netloc microblaze_3_debug 1 1 6 NJ 880 NJ 880 NJ 880 NJ 880 NJ 850 NJ
+preplace netloc tmrmvoter_5_Outs 1 13 1 5490
+preplace netloc microblaze_2_dlmb_axi 1 6 3 NJ -70 NJ -70 3870
+preplace netloc microblaze_1_dlmb_1 1 6 2 NJ 970 NJ
+preplace netloc microblaze_0_ilmb_axi 1 6 3 2220 2950 2970 2790 3840
+preplace netloc microblaze_1_ilmb_int 1 7 1 3030
+preplace netloc microblaze_1_axi_periph_M04_AXI 1 0 9 NJ 490 NJ 490 NJ 490 NJ 490 NJ 490 NJ 490 NJ 490 NJ 570 3850
+preplace netloc microblaze_5_axi_dp 1 7 1 3080
+preplace netloc microblaze_4_dlmb_1 1 6 2 2160 3580 2920
+preplace netloc axi_gpio_0_gpio_io_o1 1 11 1 NJ
+preplace netloc reset_rtl_1 1 0 4 NJ 280 NJ 280 160 280 560
+preplace netloc axi_uartlite_1_tx 1 9 1 4600
+preplace netloc rst_microblaze_3_clk_wiz_1_100M_interconnect_aresetn 1 5 3 NJ 280 NJ 280 NJ
+preplace netloc microblaze_1_axi_dp 1 7 1 2990
+preplace netloc memconformitymodule_2_rw 1 6 1 2040
+preplace netloc rst_microblaze_2_clk_wiz_1_100M_bus_struct_reset 1 5 2 NJ 730 NJ
+preplace netloc microblaze_0_dlmb_int 1 7 3 NJ 2780 NJ 2780 NJ
+preplace netloc microblaze_0_Clk 1 3 8 580 2590 1030 2720 NJ 2720 2190 2700 3050 2760 4040 2540 NJ 2540 4840
+preplace netloc microblaze_5_axi_periph_M03_AXI 1 8 3 NJ 3600 NJ 3520 NJ
+preplace netloc microblaze_5_dlmb_int 1 7 3 NJ 3720 NJ 3720 NJ
+preplace netloc microblaze_2_dlmb_1 1 6 2 NJ 560 NJ
+preplace netloc rst_microblaze_3_clk_wiz_1_100M_mb_reset 1 5 4 NJ -850 NJ -100 NJ -100 NJ
+preplace netloc microblaze_5_ilmb_axi 1 6 3 NJ 3660 NJ 3670 3840
+preplace netloc tmrmvoter_3_Outs 1 11 3 NJ 860 NJ 860 N
+preplace netloc microblaze_2_dlmb_int 1 7 1 2950
+preplace netloc rst_microblaze_2_clk_wiz_1_100M_peripheral_aresetn 1 0 11 NJ 700 NJ 700 NJ 700 NJ 700 NJ 700 1450 700 2100 350 2990 -30 4010 150 NJ 150 NJ
+preplace netloc microblaze_2_intr 1 8 1 N
+preplace netloc microblaze_5_debug 1 1 6 NJ 1990 NJ 1990 NJ 1990 NJ 1990 NJ 1990 NJ
+preplace netloc microblaze_2_ilmb_axi 1 6 3 NJ -60 NJ -60 3840
+preplace netloc microblaze_2_debug 1 1 6 NJ 1310 NJ 1310 NJ 1310 NJ 1310 NJ 1290 NJ
+preplace netloc microblaze_4_Clk 1 3 8 590 2960 1020 2960 NJ 2960 2070 3150 3090 2890 4000 3230 NJ 3230 NJ
+preplace netloc clk_wiz_1_locked 1 4 1 1010
+preplace netloc microblaze_4_ilmb_1 1 6 2 2170 3590 2910
+preplace netloc microblaze_2_ilmb_1 1 6 2 NJ 570 NJ
+preplace netloc microblaze_1_debug 1 1 6 -120 1820 NJ 1820 NJ 1820 NJ 1820 NJ 1820 NJ
+preplace netloc microblaze_0_debug 1 1 6 NJ 1890 NJ 1890 NJ 1890 NJ 1890 NJ 1890 2150
+preplace netloc microblaze_3_intr 1 8 1 3850
+preplace netloc microblaze_0_axi_dp 1 7 1 2960
+preplace netloc microblaze_4_ilmb_int 1 7 3 NJ 3300 NJ 3260 4590
+preplace netloc microblaze_3_axi_periph_M05_AXI 1 8 3 3920 230 NJ 230 NJ
+preplace netloc microblaze_5_ilmb_1 1 6 2 2200 4080 2910
+preplace netloc microblaze_0_dlmb_axi 1 6 3 NJ 2940 NJ 2820 3850
+preplace netloc tmrit_1_heal_s 1 4 2 1070 2730 1490
+preplace netloc microblaze_2_ilmb_int 1 7 1 2960
+preplace netloc microblaze_3_dlmb_int 1 7 1 3090
+preplace netloc microblaze_1_ilmb_1 1 6 2 NJ 960 NJ
+preplace netloc tmrmvoter_4_Outs 1 13 1 N
+preplace netloc rst_clk_wiz_1_100M_interconnect_aresetn 1 5 4 NJ 2650 NJ 2650 3090 2400 NJ
+preplace netloc microblaze_4_dlmb_axi 1 6 3 2140 3160 3040 2920 3840
+preplace netloc memconformitymodule_0_datao 1 6 1 2000
+preplace netloc reset_rtl_0_1 1 0 5 NJ 2060 NJ 2060 NJ 2060 NJ 2060 1050
+preplace netloc microblaze_1_intc_axi 1 8 1 3970
+preplace netloc memconformitymodule_1_add 1 6 1 1990
+preplace netloc microblaze_2_Clk 1 0 11 NJ -490 NJ -580 NJ -570 NJ -570 1030 -570 1470 -570 2060 -30 2940 -80 4040 130 NJ 130 NJ
+preplace netloc microblaze_3_Clk 1 0 11 NJ -510 NJ -560 NJ -560 NJ -560 1020 -940 1450 -1050 2030 1390 3090 1170 4020 250 NJ 250 NJ
+preplace netloc xlconcat_3_dout 1 2 1 160
+preplace netloc lmb_bram3_douta 1 5 2 1530 -320 NJ
+preplace netloc axi_gpio_1_gpio_io_o1 1 11 1 NJ
+preplace netloc axi_uartlite_2_tx 1 9 1 4590
+preplace netloc tmrit_0_heal_s 1 3 3 NJ -460 NJ -460 1480
+preplace netloc rst_microblaze_5_clk_wiz_1_100M_interconnect_aresetn 1 5 3 NJ 3470 NJ 3600 NJ
+preplace netloc microblaze_5_dlmb_axi 1 6 3 NJ 3640 NJ 3660 3850
+preplace netloc microblaze_5_interrupt 1 6 4 NJ 3190 NJ 2910 NJ 2910 4560
+preplace netloc axi_gpio_0_gpio_io_o 1 11 1 5110
+preplace netloc xlconcat_3_dout1 1 4 1 N
+preplace netloc rst_microblaze_3_clk_wiz_1_100M_bus_struct_reset 1 5 2 NJ 240 2010
+preplace netloc microblaze_0_intr 1 8 3 4070 2560 NJ 2560 4820
+preplace netloc uart_rtl_rxd_1 1 9 5 4570 950 NJ 950 NJ 950 NJ 950 NJ
+preplace netloc axi_gpio_2_gpio_io_o 1 11 1 5110
+preplace netloc microblaze_1_interrupt 1 6 4 NJ 410 NJ 410 NJ 370 4560
+preplace netloc rst_clk_wiz_1_100M_peripheral_aresetn 1 5 6 NJ 2670 NJ 3130 NJ 2880 NJ 2880 NJ 2880 4820
+levelinfo -pg 1 -640 -250 70 470 920 1290 1890 2690 3690 4437 4700 4980 5210 5400 5510 -top -1090 -bot 4090
+",
+}
+{
+   da_axi4_cnt: "12",
+   da_board_cnt: "8",
+   da_mb_cnt: "7",
+}

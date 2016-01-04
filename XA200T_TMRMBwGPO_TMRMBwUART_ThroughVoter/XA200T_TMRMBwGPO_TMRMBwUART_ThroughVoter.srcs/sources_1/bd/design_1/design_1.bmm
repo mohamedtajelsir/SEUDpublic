@@ -1,0 +1,63 @@
+WORKFLOW_OPERATION simulation,dialog;
+
+DEFINE_MEMORY_TYPE microblaze_0_local_memory_lmb_bram_MEM_DEVICE [0x00010000] 32;
+DEFINE_MEMORY_TYPE microblaze_1_local_memory_lmb_bram_MEM_DEVICE [0x00010000] 32;
+DEFINE_MEMORY_TYPE microblaze_2_local_memory_lmb_bram_MEM_DEVICE [0x00010000] 32;
+DEFINE_MEMORY_TYPE microblaze_3_local_memory_lmb_bram_MEM_DEVICE [0x00010000] 32;
+DEFINE_MEMORY_TYPE microblaze_4_local_memory_lmb_bram_MEM_DEVICE [0x00010000] 32;
+DEFINE_MEMORY_TYPE microblaze_5_local_memory_lmb_bram_MEM_DEVICE [0x00010000] 32;
+
+ADDRESS_MAP microblaze_0 MICROBLAZE-LE 100 microblaze_0
+   ADDRESS_SPACE microblaze_0_local_memory_lmb_bram_ADDR_SPACE microblaze_0_local_memory_lmb_bram_MEM_DEVICE ECC_COMBINED_FOR_SIMULATION [0x00000000:0x0000FFFF] microblaze_0_local_memory/dlmb_bram_if_cntlr
+     BUS_BLOCK
+      microblaze_0_local_memory_lmb_bram_BUS_BLK [39:8] INPUT = "design_1_lmb_bram_0.mem";
+      microblaze_0_local_memory_lmb_bram_BUS_BLK_ECC ECCH32-7 [7:0];
+     END_BUS_BLOCK;
+   END_ADDRESS_SPACE;
+END_ADDRESS_MAP;
+
+ADDRESS_MAP microblaze_1 MICROBLAZE-LE 100 microblaze_1
+   ADDRESS_SPACE microblaze_1_local_memory_lmb_bram_ADDR_SPACE microblaze_1_local_memory_lmb_bram_MEM_DEVICE ECC_COMBINED_FOR_SIMULATION [0x00000000:0x0000FFFF] microblaze_1_local_memory/dlmb_bram_if_cntlr
+     BUS_BLOCK
+      microblaze_1_local_memory_lmb_bram_BUS_BLK [39:8] INPUT = "design_1_lmb_bram_1.mem";
+      microblaze_1_local_memory_lmb_bram_BUS_BLK_ECC ECCH32-7 [7:0];
+     END_BUS_BLOCK;
+   END_ADDRESS_SPACE;
+END_ADDRESS_MAP;
+
+ADDRESS_MAP microblaze_2 MICROBLAZE-LE 100 microblaze_2
+   ADDRESS_SPACE microblaze_2_local_memory_lmb_bram_ADDR_SPACE microblaze_2_local_memory_lmb_bram_MEM_DEVICE ECC_COMBINED_FOR_SIMULATION [0x00000000:0x0000FFFF] microblaze_2_local_memory/dlmb_bram_if_cntlr
+     BUS_BLOCK
+      microblaze_2_local_memory_lmb_bram_BUS_BLK [39:8] INPUT = "design_1_lmb_bram_3.mem";
+      microblaze_2_local_memory_lmb_bram_BUS_BLK_ECC ECCH32-7 [7:0];
+     END_BUS_BLOCK;
+   END_ADDRESS_SPACE;
+END_ADDRESS_MAP;
+
+ADDRESS_MAP microblaze_3 MICROBLAZE-LE 100 microblaze_3
+   ADDRESS_SPACE microblaze_3_local_memory_lmb_bram_ADDR_SPACE microblaze_3_local_memory_lmb_bram_MEM_DEVICE ECC_COMBINED_FOR_SIMULATION [0x00000000:0x0000FFFF] microblaze_3_local_memory/dlmb_bram_if_cntlr
+     BUS_BLOCK
+      microblaze_3_local_memory_lmb_bram_BUS_BLK [39:8] INPUT = "design_1_lmb_bram_2.mem";
+      microblaze_3_local_memory_lmb_bram_BUS_BLK_ECC ECCH32-7 [7:0];
+     END_BUS_BLOCK;
+   END_ADDRESS_SPACE;
+END_ADDRESS_MAP;
+
+ADDRESS_MAP microblaze_4 MICROBLAZE-LE 100 microblaze_4
+   ADDRESS_SPACE microblaze_4_local_memory_lmb_bram_ADDR_SPACE microblaze_4_local_memory_lmb_bram_MEM_DEVICE ECC_COMBINED_FOR_SIMULATION [0x00000000:0x0000FFFF] microblaze_4_local_memory/dlmb_bram_if_cntlr
+     BUS_BLOCK
+      microblaze_4_local_memory_lmb_bram_BUS_BLK [39:8] INPUT = "design_1_lmb_bram_4.mem";
+      microblaze_4_local_memory_lmb_bram_BUS_BLK_ECC ECCH32-7 [7:0];
+     END_BUS_BLOCK;
+   END_ADDRESS_SPACE;
+END_ADDRESS_MAP;
+
+ADDRESS_MAP microblaze_5 MICROBLAZE-LE 100 microblaze_5
+   ADDRESS_SPACE microblaze_5_local_memory_lmb_bram_ADDR_SPACE microblaze_5_local_memory_lmb_bram_MEM_DEVICE ECC_COMBINED_FOR_SIMULATION [0x00000000:0x0000FFFF] microblaze_5_local_memory/dlmb_bram_if_cntlr
+     BUS_BLOCK
+      microblaze_5_local_memory_lmb_bram_BUS_BLK [39:8] INPUT = "design_1_lmb_bram_5.mem";
+      microblaze_5_local_memory_lmb_bram_BUS_BLK_ECC ECCH32-7 [7:0];
+     END_BUS_BLOCK;
+   END_ADDRESS_SPACE;
+END_ADDRESS_MAP;
+

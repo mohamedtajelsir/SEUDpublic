@@ -1,0 +1,6 @@
+10:15:56 **** Incremental Build of configuration Debug for project BlinkingLED3 ****
+make all 
+make: Nothing to be done for `all'.
+
+10:15:56 Build Finished (took 121ms)
+

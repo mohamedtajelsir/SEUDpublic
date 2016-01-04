@@ -1,0 +1,6 @@
+20:59:48 **** Auto Build of configuration Debug for project BlinkingLED0 ****
+make all 
+make: Nothing to be done for `all'.
+
+20:59:48 Build Finished (took 392ms)
+

@@ -1,0 +1,6 @@
+10:15:55 **** Incremental Build of configuration Debug for project CounterUARTPrint2 ****
+make all 
+make: Nothing to be done for `all'.
+
+10:15:55 Build Finished (took 120ms)
+
