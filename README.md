@@ -1,4 +1,4 @@
-# SEUD
+# SEUD: Single Event Upset Detector Experiment Project Files
 - This repo will only contain source files. 
 - Do not create projects inside the git repo.
 
