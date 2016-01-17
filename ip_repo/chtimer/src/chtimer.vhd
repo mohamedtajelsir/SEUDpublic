@@ -1,45 +1,25 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: kth.se
+-- Engineer: Tage (mtme@kth.se)
 -- 
 -- Create Date: 18.11.2015 22:54:12
--- Design Name: 
+-- Design Name: computation/healing timer
 -- Module Name: chtimer - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
+-- Project Name: SEUD
+-- Target Devices: Artix-7
+-- Tool Versions: Vivado 2015.4
 -- Description: 
--- 
+-- A two phase timer the issues two signals to act as enable signals for the computation and healing logic. It instantiates a counter with different counting periods. It also has a state machine to implement asynchronous active-low reset and produce active-high output signals.
 -- Dependencies: 
--- 
+-- XA200tcounter
 -- Revision:
 -- Revision 0.01 - File Created
--- Additional Comments:
+-- Additional Comments: comments are added.
 -- 
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library work; use work.all;
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 19.11.2015 15:11:52
--- Design Name: 
--- Module Name: XA200tCounter - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;

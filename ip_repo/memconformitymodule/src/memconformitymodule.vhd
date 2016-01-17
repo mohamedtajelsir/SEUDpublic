@@ -1,16 +1,16 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: kth.se
+-- Engineer: Tage (mtme@kth.se)
 -- 
 -- Create Date: 11.12.2015 19:20:14
--- Design Name: 
+-- Design Name: Memory Conformity Module
 -- Module Name: memconformitymodule - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
+-- Project Name: SEUD
+-- Target Devices: Artix-7
+-- Tool Versions: Vivado 2015.4
+-- Description: The intention behind this module is to correct the memory elements by assuming that two out of 3 redundant memory logic should have the right value. The module is basically a 32 bit counter and an additional bit to issue r/w commands to the memory. The module keeps going through all memory addresses, read values from 3 memory units, pass them to a majority voter, write the voted value back to the same address before moving to the next address. It has enable signal thus allows it to synchronize the healing process.
 -- 
--- Dependencies: 
+-- Dependencies: tmrmvoter
 -- 
 -- Revision:
 -- Revision 0.01 - File Created

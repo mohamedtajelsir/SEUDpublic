@@ -14,7 +14,7 @@
 --The inputs are ordered in multiplexed fashion .... 
 --For example if A(5:1), B(5:1) and C(5:1) they would be connected as A5,B5,C5,A4,B4,C4,.... A1,B1,C1 at the input port
 -- Dependencies: 
--- 
+-- None
 -- Revision:
 -- Version 2.00 - Accept Inputs as 3 consecutive buses instead of set of individual signals
 --for examples (Ins(3*buswidth)) would be treated as (Ins(3*buswidth),Ins(2*buswidth),Ins(buswidth))

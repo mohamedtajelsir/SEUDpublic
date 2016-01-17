@@ -1,3 +1,23 @@
+----------------------------------------------------------------------------------
+-- Company: kth.se
+-- Engineer: Tage (mtme@kth.se)
+-- 
+-- Design Name: AXI Triple Modular Redundancy Majority Voter
+-- Module Name: AXItmrmvoter - Behavioral
+-- Project Name: SEUD
+-- Target Devices: Artix-7
+-- Tool Versions: Vivado 2015.4
+-- Description:
+--This is the top-level hdl file defining interfaces and submodules required to implement a modular functionality that helps triple modular processor to vote on values by writing to the 1st 4 registers memory mapped registers and receiving values on other subsequent 4 memory mapped registers. The memory address of the 1st register is at the IP base address generated, manually or automatically, during IP based design flow. It uses Xilinx AXI bus protocol. The princple of operation is as follows:
+----------I.  The processors can send values to any of the  4 registers (32bits each) through their correponding 3 AXI buses. 
+----------II. The module has 4 32-bit wide combinatorial majority voters that continuously put the voting result from the corresponding registers to a read-only registers accessible by the processors.
+----------III. The processor can get the voted values in the next clock cycle from the other 4 registers. For example p1 writes a value to reg1 through its own AXI bus (AXI_S00), and so does p2 and p3 in the second set of registers accessible from the 3 axi busses
+-- Dependencies: *AXI_S00*, *AXI_S01*, *AXI_S02* and TMRmvoter (TMR majority voter)
+--Version: 1.0
+--Date of Design: 15th/Dec/2015
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

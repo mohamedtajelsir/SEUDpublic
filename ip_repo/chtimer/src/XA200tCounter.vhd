@@ -1,17 +1,17 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: kth.se
+-- Engineer: Tage (mtme@kth.se)
 -- 
 -- Create Date: 19.11.2015 15:11:52
--- Design Name: 
+-- Design Name: General width counter
 -- Module Name: XA200tCounter - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
+-- Project Name: SEUD
+-- Target Devices: Artix-7
+-- Tool Versions: Vivado 2015.4
+-- Description: Up Counter with active high enable signal, active low synchronous reset, active high output when the counter reach maximum value. It has the 4 MSB bits as output for diagnosis purposes which impose a lower bound on the minimum width of the counter (i.e. min width is 4)
 -- 
 -- Dependencies: 
--- 
+-- None
 -- Revision:
 -- Revision 0.01 - File Created
 -- Additional Comments:
