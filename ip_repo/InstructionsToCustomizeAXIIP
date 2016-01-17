@@ -1,0 +1,114 @@
+Some instructions to create AXI IP .... 
+
+1. prevent writing to the 4 registers:
+
+              --The following code has been commented to prevent the 4 registers from any writing
+                 --being done by the processor
+--	          when b"100" =>
+--	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
+--	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
+--	                -- Respective byte enables are asserted as per write strobes                   
+--	                -- slave registor 4
+--	                slv_reg4(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+--	              end if;
+--	            end loop;
+--	          when b"101" =>
+--	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
+--	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
+--	                -- Respective byte enables are asserted as per write strobes                   
+--	                -- slave registor 5
+--	                slv_reg5(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+--	              end if;
+--	            end loop;
+--	          when b"110" =>
+--	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
+--	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
+--	                -- Respective byte enables are asserted as per write strobes                   
+--	                -- slave registor 6
+--	                slv_reg6(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+--	              end if;
+--	            end loop;
+--	          when b"111" =>
+--	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
+--	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
+--	                -- Respective byte enables are asserted as per write strobes                   
+--	                -- slave registor 7
+--	                slv_reg7(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
+--	              end if;
+--	            end loop;
+	          when others =>
+	            slv_reg0 <= slv_reg0;
+	            slv_reg1 <= slv_reg1;
+	            slv_reg2 <= slv_reg2;
+	            slv_reg3 <= slv_reg3;
+	            --The following code has been commented to prevent the 4 registers from any writing
+	               --being done by the processor
+	            --slv_reg4 <= slv_reg4;
+	            --slv_reg5 <= slv_reg5;
+	            --slv_reg6 <= slv_reg6;
+	            --slv_reg7 <= slv_reg7;
+	        end case;
+	      end if;
+	    end if;
+	  end if;                   
+	end process; 
+	
+	
+
+2. create ports in the axi bus interface 
+
+		-- Users to add parameters here
+        NUMBER_OF_REGISTERS_TO_BE_VOTED_ON : integer :=4;
+		-- User parameters ends
+		-- Do not modify the parameters beyond this line
+
+		-- Users to add ports here
+        --Port to Export Data to and From TMR majority Voter ... The width of 4 indicates 4 registers
+        TO_TMRMVOTER    : out std_logic_vector(4*C_S_AXI_DATA_WIDTH-1 downto 0);
+        FROM_TMRMVOTER    : in std_logic_vector(4*C_S_AXI_DATA_WIDTH-1 downto 0);
+		-- User ports ends
+		
+3. add a process for reading and writing logic
+
+
+	-- Add user logic here
+    --Export data to TMR Majority Voter and Import voted results from TMR Majority Voter
+    process( slv_reg1,slv_reg2,slv_reg3,slv_reg4)
+    begin
+    TO_TMRMVOTER   <= (slv_reg0 & slv_reg1 & slv_reg2 & slv_reg3);
+    slv_reg4<= FROM_TMRMVOTER(4*C_S_AXI_DATA_WIDTH-1 downto 3*C_S_AXI_DATA_WIDTH);
+    slv_reg5<= FROM_TMRMVOTER(3*C_S_AXI_DATA_WIDTH-1 downto 2*C_S_AXI_DATA_WIDTH);
+    slv_reg6<= FROM_TMRMVOTER(2*C_S_AXI_DATA_WIDTH-1 downto 1*C_S_AXI_DATA_WIDTH);
+    slv_reg7<= FROM_TMRMVOTER(1*C_S_AXI_DATA_WIDTH-1 downto 0*C_S_AXI_DATA_WIDTH);
+    end process;
+	-- User logic ends
+	
+4. add generic/port connection to the component declaration 
+
+		generic (
+        -- Users to add parameters here
+        NUMBER_OF_REGISTERS_TO_BE_VOTED_ON : integer :=4;
+        -- User parameters ends
+		
+		
+        -- Users to add ports here
+        -- Read data (issued by slave)
+        --Port to Export Data to and From TMR majority Voter ... The width of 4 indicates 4 registers
+        TO_TMRMVOTER    : out std_logic_vector(4*C_S_AXI_DATA_WIDTH-1 downto 0);
+        FROM_TMRMVOTER    : in std_logic_vector(4*C_S_AXI_DATA_WIDTH-1 downto 0);
+        -- User ports ends
+		
+5. add component connection to instantiation
+
+	generic map (
+        -- Users to add parameters here
+        NUMBER_OF_REGISTERS_TO_BE_VOTED_ON => NUMBER_OF_REGISTERS_TO_BE_VOTED_ON,
+        -- User parameters ends
+		
+		
+        -- Users to add ports here
+        -- Read data (issued by slave)
+        --Port to Export Data to and From TMR majority Voter ... The width of 4 indicates 4 registers
+        TO_TMRMVOTER    => open,
+        FROM_TMRMVOTER    => (others => '0'),
+        -- User ports ends
